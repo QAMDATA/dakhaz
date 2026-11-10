@@ -346,6 +346,8 @@ cantSelf:['تو نەشێی ئەكاونتێ خو ژێببەی.','لا يمكنك
 adminGoogleOnly:['ئەدمین تنێ ب Gmail ا خو یا Google دچنە ژوور.','يدخل المدراء بحساب Google فقط.','Admins sign in with their Google account only.'],
 adminsNote2:['هەر ئەدمینەك هەمی دەستهەلاتان هەیە و ب Gmail ا خو دچیتە ژوور. تو نەشێی خو ژێببەی.','لكل مدير صلاحيات كاملة ويدخل ببريد Gmail. لا يمكنك حذف نفسك.','Every admin has full access and signs in with Gmail. You cannot delete yourself.'],
 adminName:['ناڤ','الاسم','Name'],email:['ئیمێل (Gmail)','البريد (Gmail)','Email (Gmail)'],keepPass:['ڤالا بهێلە دا پاسوورد نەهێتە گوهۆرین','اتركه فارغاً لإبقاء كلمة المرور','Leave empty to keep the password'],editAdmin:['✏️ گوهۆرین','✏️ تعديل','✏️ Edit'],adminLoginNote:['ئەدمین: ب ئیمێل و پاسووردی، یان ب Google بچە ژوور.','المدير: ادخل بالبريد وكلمة المرور أو عبر Google.','Admins: sign in with email and password, or with Google.'],adminSaved2:['ئەدمین هاتە پاشەكەفتكرن','تم حفظ المدير','Admin saved'],noPassYet:['پاسوورد نینە (تنێ Google)','بدون كلمة مرور (Google فقط)','No password (Google only)'],adminsNote3:['هەر ئەدمینەك هەمی دەستهەلاتان هەیە و ب ئیمێل و پاسووردی یان ب Google دچیتە ژوور. تو نەشێی خو ژێببەی.','لكل مدير صلاحيات كاملة ويدخل بالبريد وكلمة المرور أو عبر Google. لا يمكنك حذف نفسك.','Every admin has full access and signs in with email + password or Google. You cannot delete yourself.'],
+hasOpen:['ئەڤ ئەكاونتە داخازیێن ڤەكری هەنە. پێشیێ وان ب دوماهی بینە یان رەت بكە.','لهذا الحساب طلبات مفتوحة. أنهِها أو ارفضها أولاً.','This account has open orders. Finish or reject them first.'],delShopWarn:['هەمی داخازی، پارە و دەینێن ڤێ دكانێ ژی دێ هێنە ژێبرن.','ستُحذف أيضاً كل طلبات ودفعات وديون هذا المحل.','All orders, payments and debts of this shop will also be deleted.'],deleted:['هاتە ژێبرن','تم الحذف','Deleted'],myPass:['🔑 گوهۆرینا پاسووردێ من','🔑 تغيير كلمة المرور','🔑 Change my password'],passChanged2:['پاسوورد هاتە گوهۆرین','تم تغيير كلمة المرور','Password changed'],repeatPass:['دووبارە پاسووردێ نوو','أعد كلمة المرور','Repeat new password'],
+dbOld:['داتابەیس هێشتا نەهاتییە نووكرن. كۆدا 🔧 ژ پەلا Dakhaz SQL ل Supabase Run بكە.','قاعدة البيانات غير محدّثة. شغّل كود 🔧 من صفحة Dakhaz SQL في Supabase.','The database is not updated yet. Run the 🔧 code from the Dakhaz SQL page in Supabase.'],
 googleBtn:['ب Google بچە ژوور','الدخول عبر Google','Continue with Google'],orWord:['یان','أو','or'],
 notAdminG:['ئەڤ Gmail نە یێ ئەدمینەكی یە.','هذا البريد ليس لمدير.','This Gmail is not an admin.'],
 googleFail:['چوونا ژوور ب Google سەرنەكەفت. دووبارە تاقی بكە.','فشل الدخول عبر Google. حاول مجدداً.','Google sign-in failed. Try again.'],
@@ -416,7 +418,8 @@ async function api(fn,args,bearer){
 }
 function errMsg(e){const m=String(e&&e.message!=null?e.message:e||'');
   if(m.startsWith('stock:'))return t('shortStock')+' '+m.slice(6);
-  const map={network:'netErr',badlogin:'badLogin',stopped:'stopped',locked:'locked',phonebad:'phoneBad',phonetaken:'phoneTaken',passshort:'passShort',wrongold:'wrongOld',userbad:'userBad',state:'stateErr',imgbad:'imgBad',usertaken:'userTaken',self:'cantSelf',last:'lastAdmin',notadmin:'notAdminG',nogoogle:'googleFail',emailbad:'emailBad',emailtaken:'emailTaken',nodriver:'noDrivers',auth:'sessionEnd',invalid:'genErr'};
+  const map={network:'netErr',badlogin:'badLogin',stopped:'stopped',locked:'locked',phonebad:'phoneBad',phonetaken:'phoneTaken',passshort:'passShort',wrongold:'wrongOld',userbad:'userBad',state:'stateErr',imgbad:'imgBad',usertaken:'userTaken',self:'cantSelf',last:'lastAdmin',notadmin:'notAdminG',nogoogle:'googleFail',emailbad:'emailBad',emailtaken:'emailTaken',hasopen:'hasOpen',nodriver:'noDrivers',auth:'sessionEnd',invalid:'genErr'};
+  if(/Could not find the function|PGRST202|schema cache/i.test(m))return t('dbOld');
   return t(map[m]||'genErr')}
 const TSK=['ts','ats','rts','sts','dats','hts','dts'];
 const locTs=v=>v?toTs(new Date(v)):v;
@@ -590,7 +593,8 @@ function adminSettings(){
   const meId=db.admin.id;
   return `<div class="panel"><div class="panel-h"><span>${t('admins')} <span class="note num">${(db.admins||[]).length}</span></span><button type="button" class="btn sm pri" id="addA">${t('addAdmin')}</button></div>
     ${(db.admins||[]).map(a=>`<div class="row"><span class="av ph" style="width:38px;height:38px;font-size:17px">🔑</span><div class="grow"><b dir="auto">${esc(a.username)}</b>${a.id===meId?` <span class="pill p-delivered">${t('you')}</span>`:''}<div class="sub" dir="ltr" style="text-align:start">${a.email?esc(a.email):t('noGmail')}</div><div class="sub">${t('fullAccess')}</div></div><div class="acts"><button type="button" class="btn sm" data-gm="${a.id}">${t('editAdmin')}</button>${a.id!==meId?`<button type="button" class="btn sm danger" data-dela="${a.id}">${t('del')}</button>`:''}</div></div>`).join('')}
-  </div><p class="note" style="margin:0">${t('adminsNote3')}</p>`;
+  </div><p class="note" style="margin:0">${t('adminsNote3')}</p>
+  <form class="panel" id="mpf" style="padding:14px;display:grid;gap:10px"><b>${t('myPass')}</b>${fld('mp1',t('newPass'),'','password','required minlength="4" dir="ltr" autocomplete="new-password"')}${fld('mp2',t('repeatPass'),'','password','required minlength="4" dir="ltr" autocomplete="new-password"')}<div class="err" id="mpErr"></div><button class="btn pri" type="submit">${t('save')}</button></form>`;
 }
 function filterProducts(){return db.products.filter(p=>(S.cat==='all'||p.cat===S.cat)&&(!S.q||p.name.toLowerCase().includes(S.q.toLowerCase())))}
 function toolbar(addBtn){
@@ -618,7 +622,7 @@ function adminDrivers(){
   ${db.drivers.map(d=>{const st=driverStats(d.id);return `<div class="ocard"><div class="oh"><span class="av ph" style="width:40px;height:40px;font-size:18px">🚚</span><b>${esc(d.name)}</b><span class="pill ${d.active?'p-delivered':'p-rejected'}">${d.active?t('active'):t('paused')}</span></div>
     <div class="kv"><div>${t('onWay')}<b class="num">${st.onway}</b></div><div>${t('doneTab')}<b class="num">${st.done}</b></div><div>${t('cashGot')}<b class="num ok">${money(st.cash)}</b></div></div>
     <div class="note">📱 <span class="num">${esc(d.phone)}</span></div>
-    <div class="acts"><button class="btn sm" data-pwd="${d.id}">${t('newPassBtn')}</button><button class="btn sm" data-editd="${d.id}">${t('edit')}</button><button class="btn sm ${d.active?'danger':''}" data-togd="${d.id}">${d.active?t('pause'):t('activate')}</button></div></div>`}).join('')||`<div class="empty">${t('noDrivers')}</div>`}`;
+    <div class="acts"><button class="btn sm" data-pwd="${d.id}">${t('newPassBtn')}</button><button class="btn sm" data-editd="${d.id}">${t('edit')}</button><button class="btn sm danger" data-deld="${d.id}">🗑 ${t('del')}</button><button class="btn sm ${d.active?'danger':''}" data-togd="${d.id}">${d.active?t('pause'):t('activate')}</button></div></div>`}).join('')||`<div class="empty">${t('noDrivers')}</div>`}`;
 }
 function jobCard(o){
   const s=shop(o.shopId)||{name:'—',phone:''},before=+o.before||0;
@@ -670,7 +674,7 @@ function adminShops(){
     <div class="note">📱 <span class="num">${esc(s.phone)}</span>${s.address?' · '+esc(s.address):''}</div>${s.map?`<a class="maplink" href="${esc(s.map)}" target="_blank" rel="noopener">${t('openMap')}</a>`:`<span class="note">📍 ${t('noLoc')}</span>`}
     <div class="kv"><div>${t('bought')}<b class="num">${money(a.bought)}</b></div><div>${t('paid')}<b class="num" style="color:var(--ok)">${money(a.paid)}</b></div><div>${t('rest')}<b class="num" style="color:var(--brand2)">${money(a.rest)}</b></div></div>
     <div class="bar"><i style="width:${pct}%"></i></div>
-    <div class="acts"><button class="btn sm ok" data-pay="${s.id}">${t('takePay')}</button><button class="btn sm" data-hist="${s.id}">${t('account')}</button><button class="btn sm" data-pw="${s.id}">${t('newPassBtn')}</button><button class="btn sm" data-edits="${s.id}">${t('edit')}</button><button class="btn sm ${s.active?'danger':''}" data-tog="${s.id}">${s.active?t('pause'):t('activate')}</button></div></div>`}).join('')}`;
+    <div class="acts"><button class="btn sm ok" data-pay="${s.id}">${t('takePay')}</button><button class="btn sm" data-hist="${s.id}">${t('account')}</button><button class="btn sm" data-pw="${s.id}">${t('newPassBtn')}</button><button class="btn sm danger" data-dels="${s.id}">🗑 ${t('del')}</button><button class="btn sm" data-edits="${s.id}">${t('edit')}</button><button class="btn sm ${s.active?'danger':''}" data-tog="${s.id}">${s.active?t('pause'):t('activate')}</button></div></div>`}).join('')}`;
 }
 function shopForm(s,edit){
   s=s||{name:'',phone:''};const rnd=String(1000+Math.floor(Math.random()*9000));
@@ -754,6 +758,10 @@ function renderAdmin(){
     async d=>{await call('edit_admin',{p_id:a.id,p_name:d.an,p_email:d.em,p_pass:d.pw||null});toast(t('adminSaved2'))})});
   if(window.addA)addA.onclick=()=>modal(t('addAdmin'),fld('an',t('adminName'),'','text','required maxlength="60" dir="auto"')+fld('em',t('email'),'','email','required dir="ltr" autocapitalize="none" placeholder="name@gmail.com"')+fld('pw',t('pass'),'','text','required minlength="4" dir="ltr" autocomplete="off"')+`<div class="note">${t('fullAccess')} · ${t('adminLoginNote')}</div>`,t('create'),
     async d=>{await call('add_admin_full',{p_name:d.an,p_email:d.em,p_pass:d.pw});toast(t('created'))});
+  on('[data-dels]',b=>{const x=shop(b.dataset.dels);if(!x)return;const a=acct(x.id);modal(t('del')+' · '+esc(x.name),`<p style="margin:0">«${esc(x.name)}» ${t('willDelete')}</p>${a.rest?`<p style="margin:8px 0 0">${t('owes')}: <b class="num">${money(a.rest)}</b></p>`:''}<p class="note" style="margin:8px 0 0">${t('delShopWarn')}</p>`,t('del'),async()=>{await call('delete_shop',{p_id:x.id});toast(t('deleted'))},true)});
+  on('[data-deld]',b=>{const x=drv(b.dataset.deld);if(!x)return;modal(t('del')+' · '+esc(x.name),`<p style="margin:0">«${esc(x.name)}» ${t('willDelete')}</p>`,t('del'),async()=>{await call('delete_driver',{p_id:x.id});toast(t('deleted'))},true)});
+  if(window.mpf)mpf.onsubmit=async e=>{e.preventDefault();mpErr.textContent='';const a=mpf.mp1.value,b2=mpf.mp2.value;if(a.length<4){mpErr.textContent=t('passShort');return}if(a!==b2){mpErr.textContent=t('mismatch');return}
+    try{await api('set_my_pass',{p_token:TOKEN,p_new:a});mpf.reset();toast(t('passChanged2'))}catch(err){mpErr.textContent=errMsg(err)}};
   on('[data-dela]',b=>{const a=(db.admins||[]).find(x=>x.id===b.dataset.dela);if(!a)return;modal(t('del'),`<p style="margin:0">«${esc(a.username)}» ${t('willDelete')}</p>`,t('del'),()=>call('delete_admin',{p_id:a.id}),true)});
   if(window.adf)adf.onsubmit=async e=>{e.preventDefault();const n=adf.nw.value.trim(),n2=adf.nw2.value.trim();adErr.textContent='';
     if((n||n2)&&n!==n2){adErr.textContent=t('mismatch');return}
