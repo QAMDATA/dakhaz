@@ -89,6 +89,25 @@ main{padding-block:18px 60px;display:flex;flex-direction:column;gap:16px}
 .chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
 .chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 12px;font-size:13.5px;white-space:nowrap}
 .chip.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+.pickers{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pickbar{display:flex;align-items:center;gap:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;padding:8px 10px;text-align:start;min-width:0}
+.pk-t{display:flex;flex-direction:column;min-width:0;flex:1}.pk-t small{color:var(--muted);font-size:12px}.pk-t b{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pk-ar{color:var(--muted);font-size:14px}
+.bsheet{background:var(--surface);width:100%;max-width:560px;border-radius:22px 22px 0 0;padding:10px 16px calc(18px + env(safe-area-inset-bottom,0px));max-height:88vh;overflow:auto;display:flex;flex-direction:column;gap:12px}
+@media(min-width:600px){.bsheet{border-radius:22px}}
+.bsheet .grab{width:44px;height:5px;border-radius:9px;background:var(--line);align-self:center}
+.sheet-h{display:flex;align-items:center;justify-content:space-between}.sheet-h h2{margin:0;font-size:22px;font-weight:900}
+.sheet-x{width:44px;height:44px;border-radius:50%;border:0;background:var(--bg);color:var(--ink);font-size:20px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tile{position:relative;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:16px;padding:14px 6px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;font-weight:700;font-size:14px;line-height:1.25}
+.tile small{color:var(--muted);font-weight:500}
+.tile.on{border-color:#14a38b;background:color-mix(in srgb,#14a38b 7%,var(--surface))}
+.tile.on::after{content:"✓";position:absolute;top:8px;inset-inline-end:8px;width:24px;height:24px;border-radius:50%;background:#14a38b;color:#fff;font-size:14px;display:grid;place-items:center}
+.bav{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:20px;flex:none}
+.bav.sm{width:36px;height:36px;font-size:13px}
+.cav{width:76px;height:76px;border-radius:16px;background:var(--bg);display:grid;place-items:center;font-size:34px;overflow:hidden;flex:none;color:var(--brand)}
+.cav img{width:100%;height:100%;object-fit:cover}
+.cav.sm{width:36px;height:36px;border-radius:10px;font-size:18px}
 .brands{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}
 .brandb{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:10px 6px;font-weight:800;font-size:14px;display:flex;flex-direction:column;align-items:center;gap:2px}
 .brandb small{font-weight:500;color:var(--muted);font-size:12px}
@@ -354,7 +373,7 @@ adminsNote2:['هەر ئەدمینەك هەمی دەستهەلاتان هەیە �
 adminName:['ناڤ','الاسم','Name'],email:['ئیمێل (Gmail)','البريد (Gmail)','Email (Gmail)'],keepPass:['ڤالا بهێلە دا پاسوورد نەهێتە گوهۆرین','اتركه فارغاً لإبقاء كلمة المرور','Leave empty to keep the password'],editAdmin:['✏️ گوهۆرین','✏️ تعديل','✏️ Edit'],adminLoginNote:['ئەدمین: ب ئیمێل و پاسووردی، یان ب Google بچە ژوور.','المدير: ادخل بالبريد وكلمة المرور أو عبر Google.','Admins: sign in with email and password, or with Google.'],adminSaved2:['ئەدمین هاتە پاشەكەفتكرن','تم حفظ المدير','Admin saved'],noPassYet:['پاسوورد نینە (تنێ Google)','بدون كلمة مرور (Google فقط)','No password (Google only)'],adminsNote3:['هەر ئەدمینەك هەمی دەستهەلاتان هەیە و ب ئیمێل و پاسووردی یان ب Google دچیتە ژوور. تو نەشێی خو ژێببەی.','لكل مدير صلاحيات كاملة ويدخل بالبريد وكلمة المرور أو عبر Google. لا يمكنك حذف نفسك.','Every admin has full access and signs in with email + password or Google. You cannot delete yourself.'],
 hasOpen:['ئەڤ ئەكاونتە داخازیێن ڤەكری هەنە. پێشیێ وان ب دوماهی بینە یان رەت بكە.','لهذا الحساب طلبات مفتوحة. أنهِها أو ارفضها أولاً.','This account has open orders. Finish or reject them first.'],delShopWarn:['هەمی داخازی، پارە و دەینێن ڤێ دكانێ ژی دێ هێنە ژێبرن.','ستُحذف أيضاً كل طلبات ودفعات وديون هذا المحل.','All orders, payments and debts of this shop will also be deleted.'],deleted:['هاتە ژێبرن','تم الحذف','Deleted'],myPass:['🔑 گوهۆرینا پاسووردێ من','🔑 تغيير كلمة المرور','🔑 Change my password'],passChanged2:['پاسوورد هاتە گوهۆرین','تم تغيير كلمة المرور','Password changed'],repeatPass:['دووبارە پاسووردێ نوو','أعد كلمة المرور','Repeat new password'],
 dbOld:['داتابەیس هێشتا نەهاتییە نووكرن. كۆدا 🔧 ژ پەلا Dakhaz SQL ل Supabase Run بكە.','قاعدة البيانات غير محدّثة. شغّل كود 🔧 من صفحة Dakhaz SQL في Supabase.','The database is not updated yet. Run the 🔧 code from the Dakhaz SQL page in Supabase.'],
-outCount:['پارچێن نەماین (0)','قطع نفدت (0)','Out of stock (0)'],delOut:['ژێبرنا هەمی پارچێن نەماین','حذف كل القطع النافدة','Delete all out-of-stock'],delOutQ:['ئەڤ پارچە دێ هێنە ژێبرن:','سيتم حذف هذه القطع:','These parts will be deleted:'],outNow:['نەمایە','نفدت','Out of stock'],brand:['جۆرێ موبایلی','نوع الموبايل','Phone brand'],model:['مۆدێل','الموديل','Model'],pickBrand:['هەلبژێرە...','اختر...','Choose...'],pickModel:['مۆدێل هەلبژێرە...','اختر الموديل...','Choose model...'],modelHint:['مارکە و مۆدێل هەلبژێرە، ناڤ ب خو دهێتە نڤیسین. دشێی ب دەستێ خو ژی بنڤیسی یان بگوهۆری.','اختر النوع والموديل فيُكتب الاسم تلقائياً، ويمكنك تعديله.','Pick brand and model and the name fills in; you can still edit it.'],otherBrand:['🔌 گشتی','🔌 عام','🔌 General'],googleBtn:['ب Google بچە ژوور','الدخول عبر Google','Continue with Google'],orWord:['یان','أو','or'],
+outCount:['پارچێن نەماین (0)','قطع نفدت (0)','Out of stock (0)'],delOut:['ژێبرنا هەمی پارچێن نەماین','حذف كل القطع النافدة','Delete all out-of-stock'],delOutQ:['ئەڤ پارچە دێ هێنە ژێبرن:','سيتم حذف هذه القطع:','These parts will be deleted:'],outNow:['نەمایە','نفدت','Out of stock'],brand:['جۆرێ موبایلی','نوع الموبايل','Phone brand'],model:['مۆدێل','الموديل','Model'],pickBrand:['هەلبژێرە...','اختر...','Choose...'],pickModel:['مۆدێل هەلبژێرە...','اختر الموديل...','Choose model...'],modelHint:['مارکە و مۆدێل هەلبژێرە، ناڤ ب خو دهێتە نڤیسین. دشێی ب دەستێ خو ژی بنڤیسی یان بگوهۆری.','اختر النوع والموديل فيُكتب الاسم تلقائياً، ويمكنك تعديله.','Pick brand and model and the name fills in; you can still edit it.'],otherBrand:['🔌 گشتی','🔌 عام','🔌 General'],modelAdded:['هاتە زێدەكرن ✓','تمت الإضافة ✓','Added ✓'],newBrand:['جۆرەكێ نوو زێدە بكە...','إضافة نوع جديد...','Add new brand...'],newModel:['مۆدێلەكێ نوو زێدە بكە...','إضافة موديل جديد...','Add new model...'],newBrandName:['ناڤێ جۆرێ موبایلی یێ نوو','اسم النوع الجديد','New brand name'],newModelName:['ناڤێ مۆدێلێ نوو','اسم الموديل الجديد','New model name'],companies:['كۆمپانیا','الشركات','Brands'],types:['جۆر','الأنواع','Types'],googleBtn:['ب Google بچە ژوور','الدخول عبر Google','Continue with Google'],orWord:['یان','أو','or'],
 notAdminG:['ئەڤ Gmail نە یێ ئەدمینەكی یە.','هذا البريد ليس لمدير.','This Gmail is not an admin.'],
 googleFail:['چوونا ژوور ب Google سەرنەكەفت. دووبارە تاقی بكە.','فشل الدخول عبر Google. حاول مجدداً.','Google sign-in failed. Try again.'],
 gmail:['Gmail','Gmail','Gmail'],setGmail:['📧 Gmail','📧 Gmail','📧 Gmail'],gmailTitle:['Gmail بو چوونا ژوور ب Google','بريد Gmail للدخول عبر Google','Gmail for Google sign-in'],
@@ -368,8 +387,8 @@ const CATS=[
 ['screen','شاشە','شاشات','Screens'],['battery','باتری','بطاريات','Batteries'],['board','خەریتە (بۆرد)','بوردات','Motherboards'],
 ['ic','ئای سی و چیپ','آي سي ورقائق','ICs & chips'],['chargeport','پۆرتێ شەحنێ','منافذ الشحن','Charging ports'],['flex','فلێكس','فليكسات','Flex cables'],
 ['camback','كامێرا پشتێ','كاميرا خلفية','Rear cameras'],['camfront','كامێرا پێشێ','كاميرا أمامية','Front cameras'],['speaker','سپیكەر','سبيكرات','Loudspeakers'],
-['earpiece','سماعا گوهی','سماعات المكالمة','Earpieces'],['mic','مایك','مايكات','Microphones'],['sensor','سینسۆر و Face ID','حساسات و Face ID','Sensors & Face ID'],
-['vibrator','ڤایبرەیتەر','هزازات','Vibrators'],['backglass','پشتا موبایلی','أغطية خلفية','Back covers'],['housing','فرەیم و هاوسینگ','إطارات وهياكل','Frames & housings'],
+['earpiece','سماعا گوهی','سماعات المكالمة','Earpieces'],['earflex','سماعا گوهی + كێبل','سماعة داخلية + كيبل','Earpiece + flex'],['mic','مایك','مايكات','Microphones'],['sensor','سینسۆر و Face ID','حساسات و Face ID','Sensors & Face ID'],['proxflex','كێبلێ حەساس','كيبل الحساس','Proximity flex'],
+['vibrator','ڤایبرەیتەر','هزازات','Vibrators'],['backglass','پشتا موبایلی','أغطية خلفية','Back covers'],['housing','فرەیم و هاوسینگ','إطارات وهياكل','Frames & housings'],['frame','ئیتارێ شاشێ','إطار الشاشة','Screen frames'],
 ['buttons','دوگمە','أزرار','Buttons'],['simtray','جهێ سیمكارتێ','حامل الشريحة','SIM trays'],['camlens','شیشا كامێرێ','عدسات الكاميرا','Camera lenses'],
 ['protector','شیشا پاراستنێ','لاصقات حماية','Screen protectors'],['charger','شاحن','شواحن','Chargers'],['cable','كێبل','كيبلات','Cables'],
 ['earphones','گوهگر','سماعات','Earphones'],['watch','سەعەتێن سمارت','ساعات ذكية','Smart watches'],['case','كەڤەر','كفرات','Cases'],
@@ -455,7 +474,7 @@ async function refresh(force){
   try{st=await api('get_state',{p_token:TOKEN})}
   catch(e){if(e.message==='auth'||e.message==='stopped'){signOut(e.message==='stopped'?t('stopped'):t('sessionEnd'));return false}throw e}
   const js=JSON.stringify(st);if(!force&&js===lastJson)return false;lastJson=js;
-  db=normalize(st);applyImgs();booted=true;
+  db=normalize(st);applyImgs();booted=true;await loadCustom(false);
   if(S.role!==db.role)S.tab=db.role==='admin'?'home':db.role==='shop'?'catalog':'jobs';
   S.role=db.role;if(db.role==='shop')S.shopId=db.me;if(db.role==='driver')S.driverId=db.me;
   render();
@@ -617,13 +636,29 @@ function filterProducts(){S.brand=S.brand||'all';
     if(qb.length&&!qb.includes(brandOf(p)))return false;const hay=normQ(p.name+' '+catName(p.cat)+' '+brandOf(p));return words.every(w=>hay.includes(w))});
   if(S.brand!=='all'){const ord=Object.fromEntries(CATS.map((c,i)=>[c[0],i]));list=list.slice().sort((a,b)=>(ord[a.cat]??99)-(ord[b.cat]??99)||a.name.localeCompare(b.name))}
   return list}
+const BCOL={iphone:'#c2410c',ipad:'#475569',samsung:'#4338ca',huawei:'#be123c',xiaomi:'#ea580c',oppo:'#15803d',vivo:'#1e293b',realme:'#ca8a04',honor:'#0e7490',infinix:'#a16207',tecno:'#1d4ed8',pixel:'#2563eb',oneplus:'#b91c1c',nokia:'#0f766e',motorola:'#334155',itel:'#db2777',other:'#64748b'};
+const CICON={screen:'📱',battery:'🔋',board:'🧩',ic:'🔲',chargeport:'🔌',flex:'〰️',camback:'📷',camfront:'🤳',speaker:'🔊',earpiece:'👂',mic:'🎙️',sensor:'👁️',vibrator:'📳',backglass:'🔙',housing:'🖼️',frame:'🔳',earflex:'🎧',proxflex:'➰',buttons:'🔘',simtray:'💳',camlens:'🔍',protector:'🛡️',charger:'⚡',cable:'🔗',earphones:'🎧',watch:'⌚',case:'👝',powerbank:'🔋',tools:'🛠️'};
+const brandInfo=k=>k==='all'?{label:t('all')}:k==='other'?{label:t('otherBrand').replace(/^\S+\s/,'')}:{label:(BRANDS.find(b=>b[0]===k)||[,k])[1]};
+const bAvatar=(k,cls='')=>k==='all'?`<span class="cav ${cls}" ${cls?'':'style="width:58px;height:58px"'}><svg viewBox="0 0 24 24" width="55%" height="55%" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.4"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></g></svg></span>`:`<span class="bav ${cls}" style="background:${BCOL[k]||'#64748b'}">${esc(brandInfo(k).label.replace(/^Google /,'').slice(0,2))}</span>`;
+const cAvatar=(c,cls='',img)=>`<span class="cav ${cls}">${img?`<img src="${img}" alt="">`:c==='all'?'<svg viewBox="0 0 24 24" width="55%" height="55%" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.4"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></g></svg>':(CICON[c]||'📦')}</span>`;
+function sheet(title,body,onPick){const ov=document.createElement('div');ov.className='ov';
+  ov.innerHTML=`<div class="bsheet" dir="${LANG==='en'?'ltr':'rtl'}" role="dialog" aria-label="${esc(title)}"><div class="grab"></div><div class="sheet-h"><h2>${esc(title)}</h2><button type="button" class="sheet-x" aria-label="${t('close')}">✕</button></div><div class="tiles">${body}</div></div>`;
+  const close=()=>ov.remove();ov.onclick=e=>{if(e.target===ov||e.target.closest('.sheet-x'))return close();const tl=e.target.closest('[data-pick]');if(tl){close();onPick(tl.dataset.pick)}};
+  document.body.appendChild(ov)}
+function openBrandSheet(){const bc={};db.products.forEach(p=>{const b=brandOf(p);bc[b]=(bc[b]||0)+1});
+  const keys=['all',...BRANDS.map(b=>b[0]).filter(k=>bc[k]),...(bc.other?['other']:[])];
+  sheet(t('companies'),keys.map(k=>`<button type="button" class="tile ${S.brand===k?'on':''}" data-pick="${k}">${bAvatar(k)}<span>${esc(brandInfo(k).label)}</span><small class="num">${k==='all'?db.products.length:bc[k]}</small></button>`).join(''),k=>{S.brand=k;S.cat='all';render()})}
+function openCatSheet(){const ps=db.products.filter(p=>S.brand==='all'||brandOf(p)===S.brand);const cc={},ci={};ps.forEach(p=>{cc[p.cat]=(cc[p.cat]||0)+1;if(!ci[p.cat]&&p.img)ci[p.cat]=p.img});
+  const keys=['all',...CATS.map(c=>c[0]).filter(k=>cc[k])];
+  sheet(t('types'),keys.map(k=>`<button type="button" class="tile ${S.cat===k?'on':''}" data-pick="${k}">${cAvatar(k,'',ci[k])}<span>${k==='all'?t('all'):esc(catName(k))}</span><small class="num">${k==='all'?ps.length:cc[k]}</small></button>`).join(''),k=>{S.cat=k;render()})}
 const grpHead=(list,i)=>{if(S.brand==='all'||S.cat!=='all')return'';const p=list[i];if(i&&list[i-1].cat===p.cat)return'';const n=list.filter(x=>x.cat===p.cat).length;return `<div class="grp-h">${catName(p.cat)} <span class="note num">(${n})</span></div>`};
 function toolbar(addBtn){
   S.brand=S.brand||'all';const bc={};db.products.forEach(p=>{const b=brandOf(p);bc[b]=(bc[b]||0)+1});
-  const brandBtns=`<div class="brands"><button type="button" class="brandb ${S.brand==='all'?'on':''}" data-b="all">📱 ${t('all')}<small class="num">${db.products.length}</small></button>${BRANDS.filter(b=>bc[b[0]]).map(b=>`<button type="button" class="brandb ${S.brand===b[0]?'on':''}" data-b="${b[0]}">${b[1]}<small class="num">${bc[b[0]]}</small></button>`).join('')}${bc.other?`<button type="button" class="brandb ${S.brand==='other'?'on':''}" data-b="other">${t('otherBrand')}<small class="num">${bc.other}</small></button>`:''}</div>`;
+  const bInfo=brandInfo(S.brand),cLbl=S.cat==='all'?t('all'):catName(S.cat);
+  const brandBtns=`<div class="pickers"><button type="button" class="pickbar" id="pkB">${bAvatar(S.brand,'sm')}<span class="pk-t"><small>${t('companies')}</small><b>${esc(bInfo.label)}</b></span><span class="pk-ar">▾</span></button><button type="button" class="pickbar" id="pkC">${cAvatar(S.cat,'sm')}<span class="pk-t"><small>${t('types')}</small><b>${esc(cLbl)}</b></span><span class="pk-ar">▾</span></button></div>`;
   const used=new Set(db.products.filter(p=>S.brand==='all'||brandOf(p)===S.brand).map(p=>p.cat));
   return `<div class="sec-head"><input class="inp search" id="q" type="search" placeholder="🔍 ${t('search')}" value="${esc(S.q)}">${addBtn||''}</div>${brandBtns}
-  <div class="chips"><button class="chip ${S.cat==='all'?'on':''}" data-c="all">${t('all')}</button>${CATS.filter(c=>used.has(c[0])).map(c=>`<button class="chip ${S.cat===c[0]?'on':''}" data-c="${c[0]}">${catName(c[0])}</button>`).join('')}</div>`;
+`;
 }
 function adminProducts(){
   const list=filterProducts();
@@ -633,13 +668,36 @@ function adminProducts(){
     ${p.stock<=0?`<div><span class="pill" style="display:inline-block;width:auto;background:#fde8e8;color:#b42318">${t('outNow')}</span></div>`:''}<div class="kv"><div class="${p.stock<=5?'low':''}">${t('inStock')}<b class="num">${p.stock}</b></div><div>${t('sold')}<b class="num">${p.sold}</b></div><div>${t('value')}<b class="num">${money(p.price*p.stock)}</b></div></div>
     <div class="acts"><button class="btn sm" data-restock="${p.id}">${t('restock')}</button><button class="btn sm" data-editp="${p.id}">${t('edit')}</button><button class="btn sm danger" data-delp="${p.id}">${t('del')}</button></div></div>`).join('')||`<div class="empty">${t('none')}</div>`}</div>`;
 }
+let CUSTOM=[],customLoaded=false,ML=[];
+async function loadCustom(force){if(customLoaded&&!force)return;try{CUSTOM=await api('get_custom_models',{p_token:TOKEN})||[]}catch(e){CUSTOM=CUSTOM||[]}customLoaded=true;syncBrands()}
+const brandIdx=(list,b)=>{const l=b.toLowerCase();return list.findIndex(x=>x[0].toLowerCase()===l||x[0].toLowerCase().split(/\s*\/\s*|\s+/).includes(l))};
+function allModels(){const L=MODELS.map(([b,m])=>[b,m.slice()]);
+  CUSTOM.forEach(([b,m])=>{let i=brandIdx(L,b);if(i<0){L.push([b,[]]);i=L.length-1}if(m&&!L[i][1].some(x=>x.toLowerCase()===m.toLowerCase()))L[i][1].push(m)});return L}
+const reEsc=x=>x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+function syncBrands(){CUSTOM.forEach(([b])=>{const l=b.toLowerCase();if(BRANDS.some(x=>x[2].test(l)||x[1].toLowerCase()===l))return;BRANDS.push(['c_'+l.replace(/\W+/g,'_'),b,new RegExp(reEsc(l))])})}
+const brandOpts=()=>{ML=allModels();return ML.map((b,i)=>`<option value="${i}">${esc(b[0])}</option>`).join('')+`<option value="new">➕ ${t('newBrand')}</option>`};
+function fillModels(i,sel){const m=document.getElementById('f-model');if(!m)return;const b=ML[i];
+  m.innerHTML=`<option value="">${b?t('pickModel'):'—'}</option>`+(b?b[1].map(x=>`<option ${x===sel?'selected':''}>${esc(x)}</option>`).join('')+`<option value="new">➕ ${t('newModel')}</option>`:'');m.disabled=!b}
+function showAdd(mode){const r=document.getElementById('addMRow');if(!r)return;r.hidden=!mode;if(!mode)return;r.dataset.mode=mode;
+  document.getElementById('addMLbl').textContent=mode==='brand'?t('newBrandName'):t('newModelName')+' · '+(ML[+document.getElementById('f-brand').value]||[''])[0];
+  const i=document.getElementById('f-newm');i.value='';i.placeholder=mode==='brand'?'Lenovo':'iPhone 17e';document.getElementById('addMErr').textContent='';i.focus()}
+async function doAddModel(){const r=document.getElementById('addMRow'),inp=document.getElementById('f-newm'),err=document.getElementById('addMErr'),btn=document.getElementById('addMBtn');
+  const v=inp.value.trim().replace(/\s+/g,' ');if(!v){inp.focus();return}const fb=document.getElementById('f-brand');let brand,model='';
+  if(r.dataset.mode==='brand'){brand=v}else{brand=(ML[+fb.value]||[''])[0];if(!brand)return;const first=brand.split(/\s*\/\s*|\s+/)[0];
+    model=BRANDS.some(x=>x[2].test(v.toLowerCase()))||v.toLowerCase().startsWith(first.toLowerCase())?v:first+' '+v}
+  btn.disabled=true;err.textContent='';
+  try{await api('add_custom_model',{p_token:TOKEN,p_brand:brand,p_model:model});await loadCustom(true);
+    fb.innerHTML=`<option value="">${t('pickBrand')}</option>`+brandOpts();const bi=brandIdx(ML,brand);fb.value=String(bi);fillModels(bi,model);showAdd(null);
+    if(model){const n=document.getElementById('f-name');if(n){n.value=ML[bi][1].find(x=>x.toLowerCase()===model.toLowerCase())||model;n.focus()}}else document.getElementById('f-model').focus();toast(t('modelAdded'))}
+  catch(e){err.textContent=errMsg(e)}finally{btn.disabled=false}}
+document.addEventListener('click',e=>{if(e.target.closest('#addMBtn'))doAddModel()});
+document.addEventListener('keydown',e=>{if(e.target.id==='f-newm'&&e.key==='Enter'){e.preventDefault();doAddModel()}});
 document.addEventListener('change',e=>{const el=e.target;
-  if(el.id==='f-brand'){const m=document.getElementById('f-model');if(!m)return;const b=MODELS[+el.value];
-    m.innerHTML=`<option value="">${b?t('pickModel'):'—'}</option>`+(b?b[1].map(x=>`<option>${esc(x)}</option>`).join(''):'');m.disabled=!b}
-  if(el.id==='f-model'&&el.value){const n=document.getElementById('f-name');if(n){n.value=el.value;n.focus()}}});
+  if(el.id==='f-brand'){if(el.value==='new'){fillModels(-1);showAdd('brand');return}showAdd(null);fillModels(+el.value)}
+  if(el.id==='f-model'){if(el.value==='new'){showAdd('model');return}showAdd(null);if(el.value){const n=document.getElementById('f-name');if(n){n.value=el.value;n.focus()}}}});
 function productForm(p){
   p=p||{name:'',cat:S.cat!=='all'?S.cat:'screen',price:'',stock:''};
-  return `<div class="field"><span class="flabel">${t('photo')}</span><div class="picker"><div class="pprev" id="pimgPrev"></div><div class="pick-acts"><label class="btn sm pri" for="pimgIn" id="pimgLbl">${t('addPhoto')}</label><input type="file" id="pimgIn" accept="image/*" hidden><button type="button" class="btn sm danger" id="pimgDel" hidden>${t('removeImg')}</button><span class="note">${t('photoHint')}</span></div></div></div>`+`<div class="grid2"><div class="field"><label for="f-brand">${t('brand')}</label><select class="inp" id="f-brand"><option value="">${t('pickBrand')}</option>${MODELS.map((b,i)=>`<option value="${i}">${esc(b[0])}</option>`).join('')}</select></div><div class="field"><label for="f-model">${t('model')}</label><select class="inp" id="f-model" disabled><option value="">—</option></select></div></div>`+fld('name',t('name'),p.name,'text','required dir="auto"')+`<div class="note" style="margin-top:-6px">${t('modelHint')}</div>`+
+  return `<div class="field"><span class="flabel">${t('photo')}</span><div class="picker"><div class="pprev" id="pimgPrev"></div><div class="pick-acts"><label class="btn sm pri" for="pimgIn" id="pimgLbl">${t('addPhoto')}</label><input type="file" id="pimgIn" accept="image/*" hidden><button type="button" class="btn sm danger" id="pimgDel" hidden>${t('removeImg')}</button><span class="note">${t('photoHint')}</span></div></div></div>`+`<div class="grid2"><div class="field"><label for="f-brand">${t('brand')}</label><select class="inp" id="f-brand"><option value="">${t('pickBrand')}</option>${brandOpts()}</select></div><div class="field"><label for="f-model">${t('model')}</label><select class="inp" id="f-model" disabled><option value="">—</option></select></div></div><div class="field" id="addMRow" hidden><label for="f-newm" id="addMLbl"></label><div style="display:flex;gap:8px"><input class="inp" id="f-newm" dir="auto" autocomplete="off" style="flex:1"><button type="button" class="btn pri" id="addMBtn">${t('add')}</button></div><div class="err" id="addMErr"></div></div>`+fld('name',t('name'),p.name,'text','required dir="auto"')+`<div class="note" style="margin-top:-6px">${t('modelHint')}</div>`+
   `<div class="field"><label for="f-cat">${t('cat')}</label><select class="inp" id="f-cat" name="cat">${CATS.map(c=>`<option value="${c[0]}" ${c[0]===p.cat?'selected':''}>${catName(c[0])}</option>`).join('')}</select></div>
   <div class="grid2">${fld('price',t('price'),p.price,'number','step="any" min="0" required')}${fld('stock',t('qty'),p.stock,'number','min="0" step="1" required')}</div>`;
 }
@@ -938,6 +996,7 @@ function bindCommon(){
   if(q)q.oninput=()=>{S.q=q.value;const pos=q.selectionStart;render();const n=document.getElementById('q');n.focus();n.setSelectionRange(pos,pos)};
   app.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{S.cat=b.dataset.c;render()});
   app.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{S.brand=b.dataset.b;S.cat='all';render()});
+  const pkB=document.getElementById('pkB'),pkC=document.getElementById('pkC');if(pkB)pkB.onclick=openBrandSheet;if(pkC)pkC.onclick=openCatSheet;
   app.querySelectorAll('[data-zoomimg]').forEach(im=>im.onclick=()=>{const p=prod(im.dataset.zoomimg);if(!p||!p.img)return;const ov=document.createElement('div');ov.className='ov imgv';ov.innerHTML=`<figure><img src="${p.img}" alt=""><figcaption dir="auto">${esc(p.name)} · <span class="num">${money(p.price)}</span></figcaption></figure>`;ov.onclick=()=>ov.remove();document.body.appendChild(ov)});
   app.querySelectorAll('[data-inv]').forEach(b=>b.onclick=()=>invModal(b.dataset.inv));
   app.querySelectorAll('[data-sthist]').forEach(b=>b.onclick=()=>histModal(b.dataset.sthist));
