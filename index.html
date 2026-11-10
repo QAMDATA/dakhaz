@@ -48,6 +48,17 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var
 .tabs::-webkit-scrollbar{display:none}
 .tab{border:0;background:none;padding:7px 14px;border-radius:999px;color:var(--muted);font-weight:500;white-space:nowrap;display:flex;gap:6px;align-items:center}
 .tab.on{background:var(--accent-soft);color:var(--brand);font-weight:700}
+.bnav{position:fixed;bottom:0;left:0;right:0;z-index:15;background:var(--surface);border-top:1px solid var(--line);box-shadow:0 -6px 24px rgba(8,14,34,.08);padding:4px 4px calc(6px + env(safe-area-inset-bottom,0px));border-radius:20px 20px 0 0}
+.bnav-in{max-width:640px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-around}
+.bn{flex:1;min-width:0;background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--muted);font-size:12px;padding:6px 2px 2px;position:relative;font-weight:600}
+.bn .ic{font-size:26px;line-height:1.1;filter:grayscale(.35)}
+.bn .lb{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.bn.on{color:var(--brand);font-weight:800}.bn.on .ic{filter:none}
+.bn.mid .ic{width:64px;height:64px;border-radius:50%;background:var(--brand);display:grid;place-items:center;margin-top:-30px;border:5px solid var(--surface);box-shadow:0 8px 18px rgba(23,56,184,.35);font-size:28px;filter:none}
+.bn .badge{position:absolute;top:2px;inset-inline-start:calc(50% + 8px)}
+.bn.mid .badge{top:-26px}
+body.hasb{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+body.hasb .toast{bottom:calc(104px + env(safe-area-inset-bottom,0px))}
 .badge{background:var(--brand2);color:#fff;border-radius:999px;font-size:11px;min-width:18px;height:18px;display:inline-grid;place-items:center;padding:0 5px}
 .lang{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;flex:none}
 .lang button{border:0;background:none;padding:5px 9px;font-size:12.5px;font-weight:700;color:var(--muted)}
@@ -560,12 +571,19 @@ function renderLogin(){
 }
 function bindLang(){app.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>setLang(b.dataset.lang))}
 
+const BNAV={admin:['home','products','orders','shops','drivers'],shop:['catalog','orders','cart','account'],driver:['done','jobs','me']};
+const BMID={admin:'orders',driver:'jobs',shop:'cart'};
+const BNAV_KEYS=[...new Set(Object.values(BNAV).flat())];
+const BICON={home:'🏠',products:'📦',orders:'📋',shops:'🏪',drivers:'🛵',map:'🗺️',settings:'⚙️',catalog:'📱',cart:'🛒',account:'👤',jobs:'🛵',done:'✅',me:'👤'};
+function bottomNav(tabs){const keys=BNAV[S.role]||[];const L=keys.map(k=>tabs.find(x=>x[0]===k)).filter(Boolean);if(!L.length)return'';
+  return `<nav class="bnav" aria-label="menu"><div class="bnav-in">${L.map(x=>`<button type="button" class="bn ${S.tab===x[0]?'on':''} ${BMID[S.role]===x[0]?'mid':''}" data-t="${x[0]}"><span class="ic">${BICON[x[0]]||'•'}</span><span class="lb">${x[1]}</span>${x[2]?`<span class="badge num">${x[2]}</span>`:''}</button>`).join('')}</div></nav>`}
 function shell(title,sub,tabs,content,img){
   app.innerHTML=`<header><div class="wrap"><div class="hrow"><img class="mark" src="${img||IMG.mark}" alt="">
     <div class="hname"><b>${esc(title)}</b><small>${esc(sub)}</small></div>${langSw()}
     <button class="btn sm" id="out">${t('logout')}</button></div>
-    <nav class="tabs">${tabs.map(x=>`<button class="tab ${S.tab===x[0]?'on':''}" data-t="${x[0]}">${x[1]}${x[2]?`<span class="badge num">${x[2]}</span>`:''}</button>`).join('')}</nav></div></header>
-    <main class="wrap">${content}</main><footer class="wrap">Dakhaz Parts · <span class="num">${PHONE}</span></footer>`;
+    ${(()=>{const top=tabs.filter(x=>!BNAV_KEYS.includes(x[0]));return top.length?`<nav class="tabs">${top.map(x=>`<button class="tab ${S.tab===x[0]?'on':''}" data-t="${x[0]}">${BICON[x[0]]?BICON[x[0]]+' ':''}${x[1]}${x[2]?`<span class="badge num">${x[2]}</span>`:''}</button>`).join('')}</nav>`:''})()}</div></header>
+    <main class="wrap">${content}</main><footer class="wrap">Dakhaz Parts · <span class="num">${PHONE}</span></footer>${bottomNav(tabs)}`;
+  document.body.classList.toggle('hasb',tabs.some(x=>BNAV_KEYS.includes(x[0])));
   bindLang();
   out.onclick=()=>signOut();
   app.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{S.tab=b.dataset.t;S.q='';S.cat='all';S.brand='all';render();window.scrollTo(0,0)});
