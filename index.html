@@ -89,6 +89,12 @@ main{padding-block:18px 60px;display:flex;flex-direction:column;gap:16px}
 .chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
 .chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 12px;font-size:13.5px;white-space:nowrap}
 .chip.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+.brands{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}
+.brandb{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:10px 6px;font-weight:800;font-size:14px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.brandb small{font-weight:500;color:var(--muted);font-size:12px}
+.brandb.on{background:var(--brand);color:#fff;border-color:var(--brand)}.brandb.on small{color:#dfe6ff}
+.grp-h{grid-column:1/-1;font-weight:900;font-size:16px;padding:8px 2px 0;border-bottom:2px solid var(--brand);color:var(--brand)}
+.search{font-size:16px}
 .pill{font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;white-space:nowrap}
 .p-new{background:var(--tag-soft);color:var(--tag)}
 .p-approved{background:var(--accent-soft);color:var(--brand)}
@@ -348,7 +354,7 @@ adminsNote2:['هەر ئەدمینەك هەمی دەستهەلاتان هەیە �
 adminName:['ناڤ','الاسم','Name'],email:['ئیمێل (Gmail)','البريد (Gmail)','Email (Gmail)'],keepPass:['ڤالا بهێلە دا پاسوورد نەهێتە گوهۆرین','اتركه فارغاً لإبقاء كلمة المرور','Leave empty to keep the password'],editAdmin:['✏️ گوهۆرین','✏️ تعديل','✏️ Edit'],adminLoginNote:['ئەدمین: ب ئیمێل و پاسووردی، یان ب Google بچە ژوور.','المدير: ادخل بالبريد وكلمة المرور أو عبر Google.','Admins: sign in with email and password, or with Google.'],adminSaved2:['ئەدمین هاتە پاشەكەفتكرن','تم حفظ المدير','Admin saved'],noPassYet:['پاسوورد نینە (تنێ Google)','بدون كلمة مرور (Google فقط)','No password (Google only)'],adminsNote3:['هەر ئەدمینەك هەمی دەستهەلاتان هەیە و ب ئیمێل و پاسووردی یان ب Google دچیتە ژوور. تو نەشێی خو ژێببەی.','لكل مدير صلاحيات كاملة ويدخل بالبريد وكلمة المرور أو عبر Google. لا يمكنك حذف نفسك.','Every admin has full access and signs in with email + password or Google. You cannot delete yourself.'],
 hasOpen:['ئەڤ ئەكاونتە داخازیێن ڤەكری هەنە. پێشیێ وان ب دوماهی بینە یان رەت بكە.','لهذا الحساب طلبات مفتوحة. أنهِها أو ارفضها أولاً.','This account has open orders. Finish or reject them first.'],delShopWarn:['هەمی داخازی، پارە و دەینێن ڤێ دكانێ ژی دێ هێنە ژێبرن.','ستُحذف أيضاً كل طلبات ودفعات وديون هذا المحل.','All orders, payments and debts of this shop will also be deleted.'],deleted:['هاتە ژێبرن','تم الحذف','Deleted'],myPass:['🔑 گوهۆرینا پاسووردێ من','🔑 تغيير كلمة المرور','🔑 Change my password'],passChanged2:['پاسوورد هاتە گوهۆرین','تم تغيير كلمة المرور','Password changed'],repeatPass:['دووبارە پاسووردێ نوو','أعد كلمة المرور','Repeat new password'],
 dbOld:['داتابەیس هێشتا نەهاتییە نووكرن. كۆدا 🔧 ژ پەلا Dakhaz SQL ل Supabase Run بكە.','قاعدة البيانات غير محدّثة. شغّل كود 🔧 من صفحة Dakhaz SQL في Supabase.','The database is not updated yet. Run the 🔧 code from the Dakhaz SQL page in Supabase.'],
-outCount:['پارچێن نەماین (0)','قطع نفدت (0)','Out of stock (0)'],delOut:['ژێبرنا هەمی پارچێن نەماین','حذف كل القطع النافدة','Delete all out-of-stock'],delOutQ:['ئەڤ پارچە دێ هێنە ژێبرن:','سيتم حذف هذه القطع:','These parts will be deleted:'],outNow:['نەمایە','نفدت','Out of stock'],brand:['جۆرێ موبایلی','نوع الموبايل','Phone brand'],model:['مۆدێل','الموديل','Model'],pickBrand:['هەلبژێرە...','اختر...','Choose...'],pickModel:['مۆدێل هەلبژێرە...','اختر الموديل...','Choose model...'],modelHint:['مارکە و مۆدێل هەلبژێرە، ناڤ ب خو دهێتە نڤیسین. دشێی ب دەستێ خو ژی بنڤیسی یان بگوهۆری.','اختر النوع والموديل فيُكتب الاسم تلقائياً، ويمكنك تعديله.','Pick brand and model and the name fills in; you can still edit it.'],googleBtn:['ب Google بچە ژوور','الدخول عبر Google','Continue with Google'],orWord:['یان','أو','or'],
+outCount:['پارچێن نەماین (0)','قطع نفدت (0)','Out of stock (0)'],delOut:['ژێبرنا هەمی پارچێن نەماین','حذف كل القطع النافدة','Delete all out-of-stock'],delOutQ:['ئەڤ پارچە دێ هێنە ژێبرن:','سيتم حذف هذه القطع:','These parts will be deleted:'],outNow:['نەمایە','نفدت','Out of stock'],brand:['جۆرێ موبایلی','نوع الموبايل','Phone brand'],model:['مۆدێل','الموديل','Model'],pickBrand:['هەلبژێرە...','اختر...','Choose...'],pickModel:['مۆدێل هەلبژێرە...','اختر الموديل...','Choose model...'],modelHint:['مارکە و مۆدێل هەلبژێرە، ناڤ ب خو دهێتە نڤیسین. دشێی ب دەستێ خو ژی بنڤیسی یان بگوهۆری.','اختر النوع والموديل فيُكتب الاسم تلقائياً، ويمكنك تعديله.','Pick brand and model and the name fills in; you can still edit it.'],otherBrand:['🔌 گشتی','🔌 عام','🔌 General'],googleBtn:['ب Google بچە ژوور','الدخول عبر Google','Continue with Google'],orWord:['یان','أو','or'],
 notAdminG:['ئەڤ Gmail نە یێ ئەدمینەكی یە.','هذا البريد ليس لمدير.','This Gmail is not an admin.'],
 googleFail:['چوونا ژوور ب Google سەرنەكەفت. دووبارە تاقی بكە.','فشل الدخول عبر Google. حاول مجدداً.','Google sign-in failed. Try again.'],
 gmail:['Gmail','Gmail','Gmail'],setGmail:['📧 Gmail','📧 Gmail','📧 Gmail'],gmailTitle:['Gmail بو چوونا ژوور ب Google','بريد Gmail للدخول عبر Google','Gmail for Google sign-in'],
@@ -543,7 +549,7 @@ function shell(title,sub,tabs,content,img){
     <main class="wrap">${content}</main><footer class="wrap">Dakhaz Parts · <span class="num">${PHONE}</span></footer>`;
   bindLang();
   out.onclick=()=>signOut();
-  app.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{S.tab=b.dataset.t;S.q='';S.cat='all';render();window.scrollTo(0,0)});
+  app.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{S.tab=b.dataset.t;S.q='';S.cat='all';S.brand='all';render();window.scrollTo(0,0)});
 }
 
 function adminHome(){
@@ -597,17 +603,33 @@ function adminSettings(){
   </div><p class="note" style="margin:0">${t('adminsNote3')}</p>
   <form class="panel" id="mpf" style="padding:14px;display:grid;gap:10px"><b>${t('myPass')}</b>${fld('mp1',t('newPass'),'','password','required minlength="4" dir="ltr" autocomplete="new-password"')}${fld('mp2',t('repeatPass'),'','password','required minlength="4" dir="ltr" autocomplete="new-password"')}<div class="err" id="mpErr"></div><button class="btn pri" type="submit">${t('save')}</button></form>`;
 }
-function filterProducts(){return db.products.filter(p=>(S.cat==='all'||p.cat===S.cat)&&(!S.q||p.name.toLowerCase().includes(S.q.toLowerCase())))}
+const BRANDS=[['iphone','iPhone',/iphone|ايفون|آيفون|ئایفۆن|ئايفون|ئایفون|ايفوون/],['ipad','iPad',/ipad|ايباد|ئایپاد/],['samsung','Samsung',/samsung|galaxy|سامسون|سامسۆن|گالاكسی|كالاكسي|جالكسي/],['huawei','Huawei',/huawei|هواوي|هواوى|هوواوی|هواوی/],
+ ['xiaomi','Xiaomi',/xiaomi|redmi|poco|شاومي|شاومی|ريدمي|ردمي|بوكو/],['oppo','Oppo',/oppo|اوبو|ئۆپۆ/],['vivo','Vivo',/vivo|فيفو|ڤیڤۆ/],['realme','Realme',/realme|ريلمي/],['honor','Honor',/honor|هونر|هۆنەر/],
+ ['infinix','Infinix',/infinix|انفنكس|انفينكس/],['tecno','Tecno',/tecno|تكنو|تيكنو/],['pixel','Google Pixel',/pixel|google|بكسل/],['oneplus','OnePlus',/oneplus|one plus|ون بلس/],['nokia','Nokia',/nokia|نوكيا|نۆكیا/],
+ ['motorola','Motorola',/motorola|moto\b|موتورولا/],['itel','itel',/\bitel\b|ايتل/]];
+const brandOf=p=>{const n=(p.name||'').toLowerCase();const b=BRANDS.find(x=>x[2].test(n));return b?b[0]:'other'};
+const normQ=v=>String(v||'').toLowerCase().replace(/[يى]/g,'ی').replace(/ك/g,'ک').replace(/[ةه]/g,'ە').replace(/\s+/g,' ').trim();
+function filterProducts(){S.brand=S.brand||'all';
+  const raw=String(S.q||'').toLowerCase().split(/\s+/).filter(Boolean);
+  const qb=[...new Set(raw.flatMap(w=>BRANDS.filter(b=>b[2].test(w)).map(b=>b[0])))];
+  const words=raw.filter(w=>!BRANDS.some(b=>b[2].test(w))).map(normQ).filter(Boolean);
+  let list=db.products.filter(p=>{if(!(S.cat==='all'||p.cat===S.cat)||!(S.brand==='all'||brandOf(p)===S.brand))return false;
+    if(qb.length&&!qb.includes(brandOf(p)))return false;const hay=normQ(p.name+' '+catName(p.cat)+' '+brandOf(p));return words.every(w=>hay.includes(w))});
+  if(S.brand!=='all'){const ord=Object.fromEntries(CATS.map((c,i)=>[c[0],i]));list=list.slice().sort((a,b)=>(ord[a.cat]??99)-(ord[b.cat]??99)||a.name.localeCompare(b.name))}
+  return list}
+const grpHead=(list,i)=>{if(S.brand==='all'||S.cat!=='all')return'';const p=list[i];if(i&&list[i-1].cat===p.cat)return'';const n=list.filter(x=>x.cat===p.cat).length;return `<div class="grp-h">${catName(p.cat)} <span class="note num">(${n})</span></div>`};
 function toolbar(addBtn){
-  const used=new Set(db.products.map(p=>p.cat));
-  return `<div class="sec-head"><input class="inp search" id="q" placeholder="${t('search')}" value="${esc(S.q)}">${addBtn||''}</div>
+  S.brand=S.brand||'all';const bc={};db.products.forEach(p=>{const b=brandOf(p);bc[b]=(bc[b]||0)+1});
+  const brandBtns=`<div class="brands"><button type="button" class="brandb ${S.brand==='all'?'on':''}" data-b="all">📱 ${t('all')}<small class="num">${db.products.length}</small></button>${BRANDS.filter(b=>bc[b[0]]).map(b=>`<button type="button" class="brandb ${S.brand===b[0]?'on':''}" data-b="${b[0]}">${b[1]}<small class="num">${bc[b[0]]}</small></button>`).join('')}${bc.other?`<button type="button" class="brandb ${S.brand==='other'?'on':''}" data-b="other">${t('otherBrand')}<small class="num">${bc.other}</small></button>`:''}</div>`;
+  const used=new Set(db.products.filter(p=>S.brand==='all'||brandOf(p)===S.brand).map(p=>p.cat));
+  return `<div class="sec-head"><input class="inp search" id="q" type="search" placeholder="🔍 ${t('search')}" value="${esc(S.q)}">${addBtn||''}</div>${brandBtns}
   <div class="chips"><button class="chip ${S.cat==='all'?'on':''}" data-c="all">${t('all')}</button>${CATS.filter(c=>used.has(c[0])).map(c=>`<button class="chip ${S.cat===c[0]?'on':''}" data-c="${c[0]}">${catName(c[0])}</button>`).join('')}</div>`;
 }
 function adminProducts(){
   const list=filterProducts();
   const outN=db.products.filter(p=>p.stock<=0).length;
   return toolbar(`<button class="btn pri" id="addP">${t('addPart')}</button>`)+(outN?`<div class="panel" style="padding:12px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between"><span>⚠️ ${t('outCount')}: <b class="num">${outN}</b></span><button type="button" class="btn sm danger" id="delOut">🗑 ${t('delOut')}</button></div>`:'')+
-  `<div class="plist">${list.map(p=>`<div class="pcard">${pimg(p)}<div class="top"><div><h3 dir="auto">${esc(p.name)}</h3><span class="cat">${catName(p.cat)}</span></div><div class="price num">${money(p.price)}</div></div>
+  `<div class="plist">${list.map((p,gi)=>grpHead(list,gi)+`<div class="pcard">${pimg(p)}<div class="top"><div><h3 dir="auto">${esc(p.name)}</h3><span class="cat">${catName(p.cat)}</span></div><div class="price num">${money(p.price)}</div></div>
     ${p.stock<=0?`<div><span class="pill" style="display:inline-block;width:auto;background:#fde8e8;color:#b42318">${t('outNow')}</span></div>`:''}<div class="kv"><div class="${p.stock<=5?'low':''}">${t('inStock')}<b class="num">${p.stock}</b></div><div>${t('sold')}<b class="num">${p.sold}</b></div><div>${t('value')}<b class="num">${money(p.price*p.stock)}</b></div></div>
     <div class="acts"><button class="btn sm" data-restock="${p.id}">${t('restock')}</button><button class="btn sm" data-editp="${p.id}">${t('edit')}</button><button class="btn sm danger" data-delp="${p.id}">${t('del')}</button></div></div>`).join('')||`<div class="empty">${t('none')}</div>`}</div>`;
 }
@@ -848,9 +870,9 @@ function invModal(id){const o=db.orders.find(x=>x.id===id);if(o)docModal(invoice
 function cartInfo(){let n=0,s=0;for(const[id,q]of Object.entries(S.cart)){const p=prod(id);if(p){n+=q;s+=p.price*q}}return{n,t:s}}
 function shopCatalog(){
   const list=filterProducts();const c=cartInfo();
-  return toolbar()+`<div class="plist">${list.map(p=>{const q=S.cart[p.id]||0;const out=p.stock<=0;return `<div class="pcard">${pimg(p)}<div class="top"><div><h3 dir="auto">${esc(p.name)}</h3><span class="cat">${catName(p.cat)}</span></div><div class="price num">${money(p.price)}</div></div>
+  return toolbar()+`<div class="plist">${list.map((p,gi)=>grpHead(list,gi)+(()=>{const q=S.cart[p.id]||0;const out=p.stock<=0;return `<div class="pcard">${pimg(p)}<div class="top"><div><h3 dir="auto">${esc(p.name)}</h3><span class="cat">${catName(p.cat)}</span></div><div class="price num">${money(p.price)}</div></div>
     <div class="note">${out?`<span style="color:var(--bad)">${t('outOf')}</span>`:p.stock<=5?`<span style="color:var(--warn)">${t('onlyLeft',`<span class="num">${p.stock}</span>`)}</span>`:t('available')}</div>
-    <div class="qty"><button data-dec="${p.id}" ${q?'':'disabled'} aria-label="-">−</button><b class="num" style="min-width:24px;text-align:center">${q}</b><button data-inc="${p.id}" ${out||q>=p.stock?'disabled':''} aria-label="+">+</button></div></div>`}).join('')||`<div class="empty">${t('none')}</div>`}</div>
+    <div class="qty"><button data-dec="${p.id}" ${q?'':'disabled'} aria-label="-">−</button><b class="num" style="min-width:24px;text-align:center">${q}</b><button data-inc="${p.id}" ${out||q>=p.stock?'disabled':''} aria-label="+">+</button></div></div>`})()).join('')||`<div class="empty">${t('none')}</div>`}</div>
   ${c.n?`<div class="cartbar"><b><span class="num">${c.n}</span> ${t('pcs')} · <span class="num">${money(c.t)}</span></b><button class="btn sm" data-t2="cart">${t('viewCart')}</button></div>`:''}`;
 }
 function shopCart(){
@@ -915,6 +937,7 @@ function bindCommon(){
   const q=document.getElementById('q');
   if(q)q.oninput=()=>{S.q=q.value;const pos=q.selectionStart;render();const n=document.getElementById('q');n.focus();n.setSelectionRange(pos,pos)};
   app.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{S.cat=b.dataset.c;render()});
+  app.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{S.brand=b.dataset.b;S.cat='all';render()});
   app.querySelectorAll('[data-zoomimg]').forEach(im=>im.onclick=()=>{const p=prod(im.dataset.zoomimg);if(!p||!p.img)return;const ov=document.createElement('div');ov.className='ov imgv';ov.innerHTML=`<figure><img src="${p.img}" alt=""><figcaption dir="auto">${esc(p.name)} · <span class="num">${money(p.price)}</span></figcaption></figure>`;ov.onclick=()=>ov.remove();document.body.appendChild(ov)});
   app.querySelectorAll('[data-inv]').forEach(b=>b.onclick=()=>invModal(b.dataset.inv));
   app.querySelectorAll('[data-sthist]').forEach(b=>b.onclick=()=>histModal(b.dataset.sthist));
